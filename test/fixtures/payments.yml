@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  driver: one
+  ride: one
+  amount: 9.99
+  timestamp: 2023-08-17 11:09:22
+  status: MyString
+
+two:
+  user: two
+  driver: two
+  ride: two
+  amount: 9.99
+  timestamp: 2023-08-17 11:09:22
+  status: MyString
