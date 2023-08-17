@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  driver: one
+  ride: one
+  rating: 1
+  comment: MyText
+  timestamp: 2023-08-17 11:10:55
+
+two:
+  user: two
+  driver: two
+  ride: two
+  rating: 1
+  comment: MyText
+  timestamp: 2023-08-17 11:10:55
