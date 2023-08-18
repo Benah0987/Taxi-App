@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_17_084822) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_18_070231) do
   create_table "cancellations", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "ride_id", null: false
@@ -75,13 +75,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_17_084822) do
   end
 
   create_table "rides", force: :cascade do |t|
-    t.integer "driver_id", null: false
     t.integer "user_id", null: false
+    t.integer "driver_id", null: false
     t.string "pickup_location"
     t.string "dropoff_location"
     t.datetime "timestamp"
     t.string "status"
-    t.decimal "fare_amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["driver_id"], name: "index_rides_on_driver_id"

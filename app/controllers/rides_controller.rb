@@ -29,7 +29,7 @@ class RidesController < ApplicationController
     private
 
     def ride_params
-      params.require(:ride).permit(:user_id, :driver_id, :pickup_location, :dropoff_location)
+      params.permit(:user_id, :driver_id, :pickup_location, :dropoff_location)
     end
 
 end

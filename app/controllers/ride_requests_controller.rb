@@ -1,16 +1,13 @@
 class RideRequestsController < ApplicationController
     # create action
     def create
-        user = User.find(params[:user_id])
-        # Assuming you have logic to find available drivers
-        driver = find_available_driver
         
-        ride_request = RideRequest.new(user: user, driver: driver, pickup_location: params[:pickup_location], dropoff_location: params[:dropoff_location])
+        ride_request = RideRequest.new(ride_request_params)
         
         if ride_request.save
-        render json: ride_request, status: :created
+          render json: ride_request, status: :created
         else
-        render json: ride_request.errors, status: :unprocessable_entity
+          render json: ride_request.errors, status: :unprocessable_entity
         end
     end
     
@@ -44,5 +41,10 @@ class RideRequestsController < ApplicationController
         # For this example, we'll assume a simple method that returns a random driver
         Driver.order('RANDOM()').first
     end
+
+    def ride_request_params
+        params.permit(:user_id, :pickup_location, :dropoff_location)
+      end
+      
       
 end
