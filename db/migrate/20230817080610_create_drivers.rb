@@ -3,7 +3,7 @@ class CreateDrivers < ActiveRecord::Migration[7.0]
     create_table :drivers do |t|
       t.string :name
       t.string :email
-      t.string :password
+      t.string :password_digest
       t.string :phone_number
       t.string :car_details
       t.datetime :registration_date

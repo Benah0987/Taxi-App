@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  skip_before_action :verify_authenticity_token, only: [:create]
     # fetching users 
     def index
         users = User.all
@@ -13,6 +14,11 @@ class UsersController < ApplicationController
         else
           render json: user.errors, status: :unprocessable_entity
         end
+    end
+    # fetching a single user 
+    def show
+      user = User.find(params[:id])
+      render json: user
     end
 
     # updating data of existing user 

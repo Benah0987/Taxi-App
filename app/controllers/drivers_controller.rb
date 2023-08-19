@@ -1,4 +1,5 @@
 class DriversController < ApplicationController
+  skip_before_action :verify_authenticity_token
     # fetching all the drivers 
     def index
         drivers = Driver.all
@@ -34,7 +35,7 @@ class DriversController < ApplicationController
 
     private
 
-    def driver_params:
-      params.require(:driver).permit(:name, :email, :password, :phone_number, :car_details, :profile_picture, :car_image)
+    def driver_params
+      params.permit(:name, :email, :password, :phone_number, :car_details, :profile_picture, :car_image)
     end
 end
