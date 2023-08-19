@@ -6,6 +6,11 @@ class DriversController < ApplicationController
         render json: drivers
     end
 
+    def current_driver
+      driver = Driver.find_by(id: session[:driver_id])
+      render json: driver
+    end
+
     # create action 
     def create
         driver = Driver.new(driver_params)

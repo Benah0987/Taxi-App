@@ -22,8 +22,8 @@ class RidesController < ApplicationController
 
     # seeing the details of a single ride 
     def show
-        ride = Ride.find(params[:id])
-        render json: ride, include: :driver
+      ride = Ride.find(params[:id])
+      render json: ride, include: [:driver, { review: { include: :user } }]
     end
 
     private

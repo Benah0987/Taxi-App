@@ -6,6 +6,12 @@ class UsersController < ApplicationController
         render json: users
     end
 
+    # getting the current user 
+    def current_user
+      user = User.find_by(id: session[:user_id])
+      render json: user
+    end
+
     # creating a new user 
     def create
         user = User.new(user_params)
