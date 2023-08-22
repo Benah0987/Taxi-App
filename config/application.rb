@@ -14,6 +14,13 @@ module TaxiApp
     # Configuration for the application, engines, and railties goes here.
     config.action_controller.default_protect_from_forgery = true
 
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins 'http://localhost:4000' # Replace with your frontend's actual domain
+        resource '*', headers: :any, methods: [:get, :post, :put, :patch, :delete, :options, :head]
+      end
+    end
+
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
     #

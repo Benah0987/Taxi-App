@@ -17,11 +17,11 @@ Rails.application.routes.draw do
 
   # Other routes and root configurations can be added here
 
-  post '/user/login', to: 'sessions#user_login'
-  delete '/user/logout', to: 'sessions#logout'
+  post '/user/login', to: 'session#user_login'
+  delete '/user/logout', to: 'session#logout'
 
-  post '/driver/login', to: 'sessions#driver_login'
-  delete '/driver/logout', to: 'drivers#logout'
+  post '/driver/login', to: 'session#driver_login'
+  delete '/driver/logout', to: 'session#logout'
 
   # getting current user
   get '/user/current_user', to: 'users#current_user'

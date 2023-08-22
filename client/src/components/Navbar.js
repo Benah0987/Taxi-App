@@ -29,13 +29,13 @@ function NavBar() {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto mb-2 mb-lg-0 justify-content-end">
             <li className="nav-item">
-              <Link to="/about" className="nav-link active" aria-current="page">
-                About us
+              <Link to="/home" className="nav-link active" aria-current="page">
+                Home
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/products" className="nav-link">
-                Products
+              <Link to="/about" className="nav-link">
+                 About us
               </Link>
             </li>
             <li className="nav-item">
@@ -44,13 +44,18 @@ function NavBar() {
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/events" className="nav-link">
-                Events
+              <Link to="/SignUp" className="nav-link">
+                SignUp
               </Link>
             </li>
             <li className="nav-item">
               <Link to="/contact" className="nav-link">
                 Contact
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/login" className="nav-link">
+                 Login
               </Link>
             </li>
           </ul>

@@ -1,4 +1,4 @@
-class SessionsController < ApplicationController
+class SessionController < ApplicationController
     skip_before_action :verify_authenticity_token
   
     def user_login

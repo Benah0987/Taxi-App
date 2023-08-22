@@ -43,6 +43,8 @@ gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 gem "bootsnap", require: false
 
 gem 'bcrypt', '~> 3.1.7'
+gem 'rack-cors'
+
 
 
 # Use Sass to process CSS
