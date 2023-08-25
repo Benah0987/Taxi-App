@@ -62,7 +62,7 @@ function Signup() {
   };
   
   return (
-    <section className="pt-5 pb-5 mt-0 align-items-center d-flex bg-dark" style={{ minHeight: '100vh', backgroundSize: 'cover', backgroundImage: 'url(https://images.unsplash.com/photo-1556122071-e404eaedb77f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8dGF4aXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60)' }}>
+    <section className="pt-5 pb-5 mt-0 align-items-center d-flex bg-dark " style={{ minHeight: '100vh',  backgroundSize: 'cover', backgroundImage: 'url(https://images.unsplash.com/photo-1556122071-e404eaedb77f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8dGF4aXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60)' }}>
       <div className="container-fluid">
         <div className="row justify-content-center align-items-center d-flex-row text-center h-100">
           <div className="col-12 col-md-4 col-lg-3 h-50">
@@ -71,7 +71,7 @@ function Signup() {
                 <h4 className="card-title mt-3 text-center">Create Account</h4>
                 <p className="text-center">Get moving with Movit</p>
                 
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} className='w-80'>
                   <div className="form-group input-group input-group-spacing">
                     <div className="input-group-prepend">
                       <span className="input-group-text"> <i className="fa fa-user"></i> </span>

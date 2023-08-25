@@ -1,5 +1,6 @@
-body{margin-top:20px;}
+
 .footer_area {
+    margin-top:20px;
     position: relative;
     z-index: 1;
     overflow: hidden;
@@ -12,7 +13,7 @@ body{margin-top:20px;}
 }
 .footer_area .row {
     margin-left: -25px;
-    margin-right: -25px;
+    /* margin-right: -25px; */
 }
 .footer_area .row .col,
 .footer_area .row .col-1,
