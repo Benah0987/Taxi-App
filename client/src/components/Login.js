@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -14,8 +18,11 @@ function Login() {
       password: password,
     };
 
+    const userType = new URLSearchParams(location.search).get('type');
+    const loginEndpoint = userType === 'driver' ? '/driver/login' : '/user/login';
+
     try {
-      const response = await fetch('http://127.0.0.1:3000/user/login', {
+      const response = await fetch(`http://127.0.0.1:3000${loginEndpoint}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -30,6 +37,8 @@ function Login() {
           title: 'Success!',
           text: 'Logged in successfully',
         });
+
+        navigate('/home');
       } else {
         // Error logging in
         Swal.fire({

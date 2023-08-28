@@ -45,8 +45,9 @@ function Landing() {
             <h1>Great Rides, Great Moments</h1>
               <p>Explore the city with our reliable and comfortable taxi service. Your journey begins with us.</p>
               <div className="mt-4">
-                <Link to="/SignUp" className="main-btn">SignUp as a Driver <i className="fas fa-shopping-basket ps-3"></i></Link>
-                <Link to="/SignUp" className="white-btn ms-lg-4 mt-lg-0 mt-4">Request a Ride<i className="fas fa-angle-right ps-3"></i></Link>
+                  <Link to="/SignUp?type=driver" className="main-btn">SignUp as a Driver <i className="fas fa-shopping-basket ps-3"></i></Link>
+                  <Link to="/SignUp?type=user" className="white-btn ms-lg-4 mt-lg-0 mt-4">Request a Ride<i className="fas fa-angle-right ps-3"></i></Link>
+
               </div>
             </div>
             <div className="col-lg-7 col-md-6 text-md-end mt-md-0 mt-4"> {/* Add text-md-end and mt-md-0 classes */}
