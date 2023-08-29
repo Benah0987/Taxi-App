@@ -150,7 +150,7 @@ function Signup() {
                     <button type="submit" className="btn btn-warning btn-block"> Create Account </button>
                   </div>
                   <p className="text-center">
-                    Have an account? <Link to="/login">Login</Link>
+                    Have an account? <Link to={`/login?type=${userType}`}>Login</Link>
                   </p>
                 </form>
               </div>

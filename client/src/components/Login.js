@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import { Link, useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router';
+import { useAuth } from './AuthContext';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -9,6 +10,9 @@ function Login() {
 
   const location = useLocation();
   const navigate = useNavigate();
+  const { currentUser } = useAuth();
+
+  console.log('currentUser:', currentUser); // Add this line to check the currentUser value
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,6 +35,13 @@ function Login() {
       });
 
       if (response.ok) {
+        // Fetch and display the current user information
+        const userResponse = await fetch(`http://127.0.0.1:3000/${userType}/current_${userType}`);
+        console.log('Response Status:', userResponse.status);
+        const userData = await userResponse.json();
+        console.log('Current User Data:', userData);
+        
+
         // Login successful
         Swal.fire({
           icon: 'success',
@@ -57,6 +68,7 @@ function Login() {
       });
     }
   };
+  const signUpLink = `/SignUp?type=${location.search.split('=')[1]}`;
 
   return (
     <section className="pt-5 pb-5 mt-0 align-items-center d-flex bg-dark" style={{ minHeight: '100vh', backgroundSize: 'cover', backgroundImage: 'url(https://images.unsplash.com/photo-1556122071-e404eaedb77f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8dGF4aXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60)' }}>
@@ -84,8 +96,11 @@ function Login() {
                   <div className="form-group">
                     <button type="submit" className="btn btn-warning btn-block"> Log In </button>
                   </div>
+                  {currentUser && (
+                    <p className="text-center">Logged in as: {currentUser.name}</p>
+                  )}
                   <p className="text-center">
-                    Don't have an account? <Link to="/signup">Create Account</Link>
+                    Don't have an account? <Link to={signUpLink}>Create Account</Link>
                   </p>
                 </form>
               </div>
