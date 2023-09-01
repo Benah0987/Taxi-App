@@ -6,11 +6,18 @@ class UsersController < ApplicationController
         render json: users
     end
 
-    # getting the current user 
     def current_user
       user = User.find_by(id: session[:user_id])
+      
+      if user.nil?
+        puts "User not found for session ID: #{session[:user_id]}"
+      else
+        puts "Current User: #{user.name}" # Output user information for debugging
+      end
+      
       render json: user
     end
+    
 
     # creating a new user 
     def create

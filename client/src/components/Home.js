@@ -9,13 +9,13 @@ function Home() {
     e.preventDefault();
 
     try {
-      const response = await fetch('/api/ride_requests', {
+      const response = await fetch('http://127.0.0.1:3000/ride_requests', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          user_id: 123, // Replace with the actual user ID from the logged-in user
+        //  user : 6,
           pickup_location: pickupLocation,
           dropoff_location: dropoffLocation,
         }),

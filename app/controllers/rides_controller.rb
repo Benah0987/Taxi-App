@@ -1,4 +1,10 @@
 class RidesController < ApplicationController
+
+  def index
+    driver = Driver.find(params[:driver_id])
+    rides = driver.rides
+    render json: rides, include: [:user, :driver, :reviews]
+  end
     # creating a ride 
     def create
         user = User.find(params[:user_id])
@@ -9,7 +15,7 @@ class RidesController < ApplicationController
         if ride.save
           render json: ride, status: :created
         else
-          render json: ride.errors, status: :unprocessable_entity
+          render json: ride.errors, status: :unprocessable_entitya
         end
     end
 

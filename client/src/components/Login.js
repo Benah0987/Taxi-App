@@ -1,30 +1,51 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
-import { Link, useLocation } from 'react-router-dom';
-import { useNavigate } from 'react-router';
-import { useAuth } from './AuthContext';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [currentUser, setCurrentUser] = useState(null); // State to hold the current user data
 
   const location = useLocation();
   const navigate = useNavigate();
-  const { currentUser } = useAuth();
 
-  console.log('currentUser:', currentUser); // Add this line to check the currentUser value
+  useEffect(() => {
+    const fetchCurrentUser = async () => {
+      try {
+        const response = await fetch(`http://127.0.0.1:3000/user/current_user`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+
+        if (response.ok) {
+          const userData = await response.json();
+          setCurrentUser(userData); // Set the current user in state
+        } else {
+          console.error('Failed to fetch current user data');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+
+    // Fetch current user data if there is a session
+    fetchCurrentUser();
+  }, []); // Empty dependency array means this effect runs once
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     const userCredentials = {
       email: email,
       password: password,
     };
-
+  
     const userType = new URLSearchParams(location.search).get('type');
     const loginEndpoint = userType === 'driver' ? '/driver/login' : '/user/login';
-
+  
     try {
       const response = await fetch(`http://127.0.0.1:3000${loginEndpoint}`, {
         method: 'POST',
@@ -33,22 +54,28 @@ function Login() {
         },
         body: JSON.stringify(userCredentials),
       });
-
+  
       if (response.ok) {
-        // Fetch and display the current user information
-        const userResponse = await fetch(`http://127.0.0.1:3000/${userType}/current_${userType}`);
-        console.log('Response Status:', userResponse.status);
-        const userData = await userResponse.json();
-        console.log('Current User Data:', userData);
-        
-
         // Login successful
         Swal.fire({
           icon: 'success',
           title: 'Success!',
           text: 'Logged in successfully',
         });
-
+  
+        // Fetch the current user data after successful login
+        const userResponse = await fetch(`http://127.0.0.1:3000/user/current_user`);
+        console.log('Response Status:', userResponse.status);
+  
+        if (userResponse.ok) {
+          const userData = await userResponse.json();
+          setCurrentUser(userData); // Set the current user in state
+          console.log('Current User Data:', userData);
+        } else {
+          // Handle the case where fetching current user data fails
+          console.error('Failed to fetch current user data');
+        }
+  
         navigate('/home');
       } else {
         // Error logging in
@@ -68,6 +95,8 @@ function Login() {
       });
     }
   };
+  
+
   const signUpLink = `/SignUp?type=${location.search.split('=')[1]}`;
 
   return (
@@ -96,9 +125,11 @@ function Login() {
                   <div className="form-group">
                     <button type="submit" className="btn btn-warning btn-block"> Log In </button>
                   </div>
+
                   {currentUser && (
                     <p className="text-center">Logged in as: {currentUser.name}</p>
                   )}
+
                   <p className="text-center">
                     Don't have an account? <Link to={signUpLink}>Create Account</Link>
                   </p>

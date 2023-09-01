@@ -1,4 +1,5 @@
 class RideRequestsController < ApplicationController
+    skip_before_action :verify_authenticity_token
     # create action
     def create
         

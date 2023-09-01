@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :users do
-    resources :ride_requests, only: [:index]
+    resources :ride_requests, only: [:index, :create]
   end
 
   resources :drivers
