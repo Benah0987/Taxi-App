@@ -47,9 +47,7 @@ gem 'bcrypt', '~> 3.1.7'
 # Gemfile
 gem 'rack-cors', require: 'rack/cors'
 
-
-
-
+gem 'jwt'
 
 # Use Sass to process CSS
 # gem "sassc-rails"

@@ -3,6 +3,7 @@ import './Signup.css';
 import Swal from 'sweetalert2';
 import { Link, useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router';
+import { useAuth } from './AuthContext'; // Import the AuthContext functions
 
 function Signup() {
   const [fullName, setFullName] = useState('');
@@ -10,75 +11,34 @@ function Signup() {
   const [password, setPassword] = useState('');
   const [phone, setPhone] = useState('');
   const [carDetails, setCarDetails] = useState('');
-  const [profilePicture, setProfilePicture] = useState(''); // Add this line
-  const [carImage, setCarImage] = useState(''); // Add this line
-
+  const [profilePicture, setProfilePicture] = useState('');
+  const [carImage, setCarImage] = useState('');
 
   const location = useLocation();
   const navigate = useNavigate();
 
   const userType = new URLSearchParams(location.search).get('type');
 
- const handleSubmit = async (e) => {
-  e.preventDefault();
+  const { signup } = useAuth(); // Get the signup function from the AuthContext
 
-  if (userType === 'driver' && (!carDetails || !profilePicture || !carImage)) {
-    // Show an error if any of the driver fields are missing
-    Swal.fire({
-      icon: 'error',
-      title: 'Error!',
-      text: 'Please fill in all driver information fields',
-    });
-    return;
-  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  const newUser = {
-    name: fullName,
-    email: email,
-    password: password,
-    phone_number: phone,
-    car_details: carDetails,
-    profile_picture: profilePicture,
-    car_image: carImage,
-  };
-
-  const endpoint = userType === 'driver' ? 'http://127.0.0.1:3000/drivers' : 'http://127.0.0.1:3000/users'
-
-    try {
-      const response = await fetch(endpoint, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(newUser),
-      });
-
-      if (response.ok) {
-        // User created successfully
-        Swal.fire({
-          icon: 'success',
-          title: 'Success!',
-          text: 'User created successfully',
-        });
-
-        // Redirect to login pages
-        navigate(`/login?type=${userType}`);
-      } else {
-        // Error creating user
-        Swal.fire({
-          icon: 'error',
-          title: 'Error!',
-          text: 'Error creating user',
-        });
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      // Show error using SweetAlert
+    if (userType === 'driver' && (!carDetails || !profilePicture || !carImage)) {
+      // Show an error if any of the driver fields are missing
       Swal.fire({
         icon: 'error',
         title: 'Error!',
-        text: 'An error occurred',
+        text: 'Please fill in all driver information fields',
       });
+      return;
+    }
+
+    // Use the signup function from AuthContext to handle user registration
+    const success = await signup(fullName, email, password, phone, carDetails, profilePicture, carImage);
+
+    if (success) {
+      navigate(`/login?type=${userType}`);
     }
   };
 

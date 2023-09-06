@@ -1,81 +1,29 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import Swal from 'sweetalert2';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { AuthContext } from './AuthContext'; // Import the AuthContext
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [currentUser, setCurrentUser] = useState(null); // State to hold the current user data
-
+  const { login } = useContext(AuthContext); // Access the login function from the AuthContext
   const location = useLocation();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchCurrentUser = async () => {
-      try {
-        const response = await fetch(`http://127.0.0.1:3000/user/current_user`, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
-
-        if (response.ok) {
-          const userData = await response.json();
-          setCurrentUser(userData); // Set the current user in state
-        } else {
-          console.error('Failed to fetch current user data');
-        }
-      } catch (error) {
-        console.error('Error:', error);
-      }
-    };
-
-    // Fetch current user data if there is a session
-    fetchCurrentUser();
-  }, []); // Empty dependency array means this effect runs once
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
-    const userCredentials = {
-      email: email,
-      password: password,
-    };
-  
-    const userType = new URLSearchParams(location.search).get('type');
-    const loginEndpoint = userType === 'driver' ? '/driver/login' : '/user/login';
-  
+
     try {
-      const response = await fetch(`http://127.0.0.1:3000${loginEndpoint}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(userCredentials),
-      });
-  
-      if (response.ok) {
+      const success = await login(email, password);
+
+      if (success) {
         // Login successful
         Swal.fire({
           icon: 'success',
           title: 'Success!',
           text: 'Logged in successfully',
         });
-  
-        // Fetch the current user data after successful login
-        const userResponse = await fetch(`http://127.0.0.1:3000/user/current_user`);
-        console.log('Response Status:', userResponse.status);
-  
-        if (userResponse.ok) {
-          const userData = await userResponse.json();
-          setCurrentUser(userData); // Set the current user in state
-          console.log('Current User Data:', userData);
-        } else {
-          // Handle the case where fetching current user data fails
-          console.error('Failed to fetch current user data');
-        }
-  
+
         navigate('/home');
       } else {
         // Error logging in
@@ -95,7 +43,6 @@ function Login() {
       });
     }
   };
-  
 
   const signUpLink = `/SignUp?type=${location.search.split('=')[1]}`;
 
@@ -114,21 +61,29 @@ function Login() {
                     <div className="input-group-prepend">
                       <span className="input-group-text"> <i className="fa fa-envelope"></i> </span>
                     </div>
-                    <input className="form-control" placeholder="Email address" type="email" onChange={(e) => setEmail(e.target.value)} />
+                    <input
+                      type="email"
+                      name="email"
+                      placeholder="Email address"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
                   </div>
                   <div className="form-group input-group input-group-spacing">
                     <div className="input-group-prepend">
                       <span className="input-group-text"> <i className="fa fa-lock"></i> </span>
                     </div>
-                    <input className="form-control" placeholder="Password" type="password" onChange={(e) => setPassword(e.target.value)} />
+                    <input
+                      className="form-control"
+                      placeholder="Password"
+                      type="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
                   </div>
                   <div className="form-group">
                     <button type="submit" className="btn btn-warning btn-block"> Log In </button>
                   </div>
-
-                  {currentUser && (
-                    <p className="text-center">Logged in as: {currentUser.name}</p>
-                  )}
 
                   <p className="text-center">
                     Don't have an account? <Link to={signUpLink}>Create Account</Link>

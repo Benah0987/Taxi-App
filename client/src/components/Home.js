@@ -1,21 +1,46 @@
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
+import { useAuth } from './AuthContext'; // Import useAuth
+import { useNavigate } from 'react-router';
 
 function Home() {
   const [pickupLocation, setPickupLocation] = useState('');
   const [dropoffLocation, setDropoffLocation] = useState('');
 
+  // Access isCurrentUser from useAuth
+  const { currentUser, isCurrentUser } = useAuth();
+  const navigate = useNavigate();
+
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
+    // Check if currentUser exists before using it
+    // if (!currentUser) {
+    //   Swal.fire({
+    //     icon: 'error',
+    //     title: 'Error',
+    //     text: 'User is not logged in.',
+    //   });
+    //   return;
+    // }
+
+    // Check if the current user is the user making the request
+    // if (!isCurrentUser(currentUser.id)) {
+    //   Swal.fire({
+    //     icon: 'error',
+    //     title: 'Error',
+    //     text: 'You are not the currently logged-in user.',
+    //   });
+    //   return;
+    // }
+
     try {
-      const response = await fetch('http://127.0.0.1:3000/ride_requests', {
+      const response = await fetch(`http://127.0.0.1:3000/users/4/ride_requests`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-        //  user : 6,
           pickup_location: pickupLocation,
           dropoff_location: dropoffLocation,
         }),
@@ -28,6 +53,9 @@ function Home() {
           title: 'Success!',
           text: 'Your ride request has been submitted.',
         });
+
+        // Navigate to the /payment route after a successful request
+        navigate('/payment');
       } else {
         Swal.fire({
           icon: 'error',
@@ -43,6 +71,7 @@ function Home() {
       });
     }
   };
+  
 
   return (
     <div className="container d-flex justify-content-center align-items-center min-vh-100">
