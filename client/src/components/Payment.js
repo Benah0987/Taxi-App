@@ -1,26 +1,95 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import Swal from 'sweetalert2';
+import { useRideContext} from './RideContext'; // Import updateRidePrice from context
 
 function Payment() {
+  const { pickupLocation, dropoffLocation, ridePrice, updateRidePrice  } = useRideContext(); // Use the context
   const [activeTab, setActiveTab] = useState('credit-card'); // Initialize the active tab state
+
+  useEffect(() => {
+    // Initialize the ride price when the component mounts
+    updateRidePrice();
+  }, []); // The empty dependency array ensures this effect runs once on component mount
 
   const handleTabChange = (tabId) => {
     setActiveTab(tabId); // Update the active tab when a navigation link is clicked
   };
 
   const handleConfirmPayment = () => {
-    // Handle the payment confirmation logic here
-    alert('Payment confirmed!');
+    updateRidePrice();
+    const formattedPrice = `Ksh ${ridePrice}`; // Format the price
+
+    Swal.fire({
+      title: 'Confirm Payment',
+      text: `Please confirm the payment of ${formattedPrice}.`, // Include the formatted price
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: 'orange',
+      confirmButtonText: 'Confirm',
+      cancelButtonText: 'Cancel',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Handle payment confirmation logic here
+        Swal.fire({
+          title: 'Thank You!',
+          text: 'Thank you for using Movit Rides!',
+          icon: 'success',
+          confirmButtonColor: 'orange',
+        });
+      }
+    });
   };
+
+  const kenyanBanks = [
+    'Equity Bank',
+    'KCB Bank',
+    'Co-operative Bank of Kenya',
+    'Standard Chartered Bank',
+    'Barclays Bank of Kenya (now Absa Bank Kenya)',
+    'Citi Bank Kenya',
+    'Diamond Trust Bank',
+    'NIC Bank',
+    'Family Bank',
+    'National Bank of Kenya',
+    // Add more banks here as needed
+  ];
 
   return (
     <div className="container py-5">
       {/* For demo purpose */}
       <div className="row mb-4">
         <div className="col-lg-8 mx-auto text-center">
-          <h1 className="display-6">Bootstrap Payment Forms</h1>
+          <h1 className="display-6" style={{ color: 'black' }}>Movit Payment Form</h1>
         </div>
       </div>
       {/* End */}
+      <div className="tab-content">
+  <div className="tab-content show active">
+    <form role="form" onSubmit={(event) => event.preventDefault()} className="text-center">
+      <div className="form-group">
+        <label htmlFor="pickupLocation">
+          <h6>Pickup Location</h6>
+        </label>
+        <p>{pickupLocation}</p>
+      </div>
+      <div className="form-group">
+        <label htmlFor="dropoffLocation">
+          <h6>Dropoff Location</h6>
+        </label>
+        <p>{dropoffLocation}</p>
+      </div>
+      <div className="form-group">
+        <label htmlFor="ridePrice">
+          <h6>Ride Price</h6>
+        </label>
+        <p> Ksh{ridePrice}</p>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+      
       <div className="row">
         <div className="col-lg-6 mx-auto">
           <div className="card">
@@ -59,11 +128,13 @@ function Payment() {
               </div>
               {/* End */}
             </div>
+
+          
             {/* Credit card form content */}
             <div className="card-body">
-              {activeTab === 'credit-card' && (
+            {activeTab === 'credit-card' && (
                 <div className="tab-content">
-                  {/* credit card info */}
+                  {/* credit card info*/}
                   <div
                     className={`tab-pane fade show active`}
                   >
@@ -89,29 +160,7 @@ function Payment() {
                           </div>
                         </div>
                       </div>
-                      <div className="row">
-                        <div className="col-sm-8">
-                          <div className="form-group">
-                            <label>
-                              <span className="hidden-xs">
-                                <h6>Expiration Date</h6>
-                              </span>
-                            </label>
-                            <div className="input-group">
-                              <input type="number" placeholder="MM" name="" className="form-control" required />
-                              <input type="number" placeholder="YY" name="" className="form-control" required />
-                            </div>
-                          </div>
-                        </div>
-                        <div className="col-sm-4">
-                          <div className="form-group mb-4">
-                            <label data-toggle="tooltip" title="Three digit CV code on the back of your card">
-                              <h6>CVV <i className="fa fa-question-circle d-inline"></i></h6>
-                            </label>
-                            <input type="text" required className="form-control" />
-                          </div>
-                        </div>
-                      </div>
+                      
                       <div className="card-footer">
                         <button
                           type="button"
@@ -137,7 +186,12 @@ function Payment() {
                     </label>
                   </div>
                   <p>
-                    <button type="button" className="btn btn-primary">
+                    <button
+                      type="button"
+                      onClick={handleConfirmPayment}
+                      className="btn btn-primary"
+                      style={{ backgroundColor: 'orange' }}
+                    >
                       <i className="fab fa-paypal mr-2"></i> Log into my Paypal
                     </button>
                   </p>
@@ -152,23 +206,21 @@ function Payment() {
                     <label htmlFor="Select Your Bank">
                       <h6>Select your Bank</h6>
                     </label>
-                    <select className="form-control" id="ccmonth">
-                      <option value="" selected disabled>--Please select your Bank--</option>
-                      <option>Bank 1</option>
-                      <option>Bank 2</option>
-                      <option>Bank 3</option>
-                      <option>Bank 4</option>
-                      <option>Bank 5</option>
-                      <option>Bank 6</option>
-                      <option>Bank 7</option>
-                      <option>Bank 8</option>
-                      <option>Bank 9</option>
-                      <option>Bank 10</option>
+                    <select className="form-control" id="selectYourBank">
+                      <option value="" selected disabled>-- Please select your Bank --</option>
+                      {kenyanBanks.map((bank, index) => (
+                        <option key={index}>{bank}</option>
+                      ))}
                     </select>
                   </div>
                   <div className="form-group">
                     <p>
-                      <button type="button" className="btn btn-primary">
+                      <button
+                        type="button"
+                        onClick={handleConfirmPayment}
+                        className="btn btn-primary"
+                        style={{ backgroundColor: 'orange' }}
+                      >
                         <i className="fas fa-mobile-alt mr-2"></i> Proceed Payment
                       </button>
                     </p>

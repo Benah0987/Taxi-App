@@ -1,20 +1,18 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import Swal from 'sweetalert2';
-import { useAuth } from './AuthContext'; // Import useAuth
+import { useAuth } from './AuthContext';
 import { useNavigate } from 'react-router';
+import { useRideContext } from './RideContext'; // Import useRideContext
+
 
 function Home() {
-  const [pickupLocation, setPickupLocation] = useState('');
-  const [dropoffLocation, setDropoffLocation] = useState('');
-
-  // Access isCurrentUser from useAuth
+  const { pickupLocation, setPickupLocation, dropoffLocation, setDropoffLocation } =  useRideContext();
   const { currentUser, isCurrentUser } = useAuth();
   const navigate = useNavigate();
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
-    // Check if currentUser exists before using it
     // if (!currentUser) {
     //   Swal.fire({
     //     icon: 'error',
@@ -24,7 +22,6 @@ function Home() {
     //   return;
     // }
 
-    // Check if the current user is the user making the request
     // if (!isCurrentUser(currentUser.id)) {
     //   Swal.fire({
     //     icon: 'error',
@@ -53,8 +50,6 @@ function Home() {
           title: 'Success!',
           text: 'Your ride request has been submitted.',
         });
-
-        // Navigate to the /payment route after a successful request
         navigate('/payment');
       } else {
         Swal.fire({
@@ -71,17 +66,16 @@ function Home() {
       });
     }
   };
-  
 
   return (
     <div className="container d-flex justify-content-center align-items-center min-vh-100">
       <div className="row border rounded-5 p-3 bg-white shadow box-area">
-        <div className="col-md-6 rounded-4 d-flex justify-content-center align-items-center flex-column left-box" >
+        <div className="col-md-6 rounded-4 d-flex justify-content-center align-items-center flex-column left-box">
           <div className="featured-image mb-3">
             <img src="https://images.unsplash.com/photo-1593465678160-f99a8371fcf6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHRheGl8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60" className="img-fluid" alt="Featured" />
           </div>
           <p className="text-white fs-2" style={{ fontFamily: 'Courier New, Courier, monospace', fontWeight: 600 }}>Be Verified</p>
-          <small className="text-white text-wrap text-center" style={{ width: '17rem',color:'black', fontFamily: 'Courier New, Courier, monospace' }}>Join experienced Designers on this platform.</small>
+          <small className="text-white text-wrap text-center" style={{ width: '17rem', color: 'black', fontFamily: 'Courier New, Courier, monospace' }}>Join experienced Designers on this platform.</small>
         </div>
         <div className="col-md-6 right-box">
           <div className="row align-items-center">
@@ -109,7 +103,10 @@ function Home() {
                 />
               </div>
               <div className="input-group mb-3">
-                <button type="submit" className="btn btn-lg btn-warning w-60 fs-6 d-flex justify-content-center align-items-center">
+                <button
+                  type="submit"
+                  className="btn btn-lg btn-warning w-60 fs-6 d-flex justify-content-center align-items-center"
+                >
                   Request Ride
                 </button>
               </div>
@@ -118,7 +115,7 @@ function Home() {
           </div>
         </div>
       </div>
-  )</div>
+    </div>
   );
 }
 

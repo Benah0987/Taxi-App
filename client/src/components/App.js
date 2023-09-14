@@ -10,27 +10,30 @@ import Landing from './Landing';
 import Footer from './Footer';
 import { AuthProvider } from './AuthContext'; // Import the AuthProvider
 import CurrentUser from './CurrentUser';
-import Payment from './Payment'
+import Payment from './Payment';
+import { RideProvider } from './RideContext'; // Import the RideProvider
 
 function App() {
   return (
     <BrowserRouter>
       <AuthProvider> {/* Wrap your entire app with AuthProvider */}
-        <div>
-          <Navbar />
-          <Routes>
-            <Route index element={<Landing />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/user" element={<CurrentUser />} />
-            <Route path="/payment" element={<Payment />} />
-            {/* Add more routes here */}
-          </Routes>
-          <Footer />
-        </div>
+        <RideProvider> {/* Wrap your app with RideProvider */}
+          <div>
+            <Navbar />
+            <Routes>
+              <Route index element={<Landing />} />
+              <Route path="/services" element={<Services />} />
+              <Route path="/home" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/user" element={<CurrentUser />} />
+              <Route path="/payment" element={<Payment />} />
+              {/* Add more routes here */}
+            </Routes>
+            <Footer />
+          </div>
+        </RideProvider>
       </AuthProvider>
     </BrowserRouter>
   );

@@ -1,20 +1,14 @@
 import React from 'react';
 import './Navbar.css';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import { NavLink } from 'react-router-dom';
 
 function NavBar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-red navbar-dark">
-      <div className="wrapper">
-        <div className="d-flex flex-column sim">
-          <span>1 item added to your quote</span>
-          <small className="text-primary">View your quote</small>
-        </div>
-      </div>
       <div className="container-fluid all-show">
-        <Link to="/" className="navbar-brand">
+        <NavLink to="/" className="navbar-brand">
           MoviT <i className="fa fa-codepen"></i>
-        </Link>
+        </NavLink>
         <button
           className="navbar-toggler"
           type="button"
@@ -29,39 +23,67 @@ function NavBar() {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto mb-2 mb-lg-0 justify-content-end">
             <li className="nav-item">
-              <Link to="/home" className="nav-link active" aria-current="page">
+              <NavLink
+                to="/home"
+                className="nav-link"
+                activeClassName="active"
+              >
                 Home
-              </Link>
+              </NavLink>
             </li>
             <li className="nav-item">
-              <Link to="/about" className="nav-link">
-                 About us
-              </Link>
+              <NavLink
+                to="/about"
+                className="nav-link"
+                activeClassName="active"
+              >
+                About us
+              </NavLink>
             </li>
             <li className="nav-item">
-              <Link to="/services" className="nav-link">
+              <NavLink
+                to="/services"
+                className="nav-link"
+                activeClassName="active"
+              >
                 Services
-              </Link>
+              </NavLink>
             </li>
             <li className="nav-item">
-              <Link to="/SignUp" className="nav-link">
+              <NavLink
+                to="/SignUp"
+                className="nav-link"
+                activeClassName="active"
+              >
                 SignUp
-              </Link>
+              </NavLink>
             </li>
             <li className="nav-item">
-              <Link to="/contact" className="nav-link">
+              <NavLink
+                to="/contact"
+                className="nav-link"
+                activeClassName="active"
+              >
                 Contact
-              </Link>
+              </NavLink>
             </li>
             <li className="nav-item">
-              <Link to="/login" className="nav-link">
-                 Login
-              </Link>
+              <NavLink
+                to="/login"
+                className="nav-link"
+                activeClassName="active"
+              >
+                Login
+              </NavLink>
             </li>
             <li className="nav-item">
-              <Link to="/user" className="nav-link">
-                 User
-              </Link>
+              <NavLink
+                to="/user"
+                className="nav-link"
+                activeClassName="active"
+              >
+                User
+              </NavLink>
             </li>
           </ul>
         </div>
