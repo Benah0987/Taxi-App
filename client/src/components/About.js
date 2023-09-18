@@ -87,9 +87,9 @@ function About() {
                 <p>
                 Introducing the Visionary Leader: Benayah Wanyoike, our CEO
                 </p>
-                <p>
-                As the CEO, Benayah Wanyoike leads the company with a visionary and strategic mindset. He possesses a keen ability to make data-driven decisions, foster innovation, and drive the organization toward achieving its goals. His leadership style emphasizes collaboration, empowering his teams to excel, and his dedication to maintaining high standards is evident in the company's continued growth and success.
-                </p>
+                <p>"Benayah Wanyoike, the CEO, leads with a strategic vision, data-driven decision-making, and a collaborative leadership style that empowers teams to excel. His commitment to high standards drives the company's ongoing success."
+
+              </p>
                 <p>
                   <em>"Our commitment to excellence drives us forward."</em>
                 </p>
@@ -111,7 +111,7 @@ function About() {
       </div>
     </div>
     <div class="row">
-      <div class="col-12 col-md-12 col-lg-4">
+      <div class="col-12 col-md-12 col-lg-4 mb-4">
         <div class="card text-white text-center bg-dark pb-2">
           <div class="card-body">
             <i class="bi bi-car"></i>
@@ -123,7 +123,7 @@ function About() {
           </div>
         </div>
       </div>
-      <div class="col-12 col-md-12 col-lg-4">
+      <div class="col-12 col-md-12 col-lg-4 mb-4">
         <div class="card text-white text-center bg-dark pb-2">
           <div class="card-body">
             <i class="bi bi-clock"></i>
@@ -135,7 +135,7 @@ function About() {
           </div>
         </div>
       </div>
-      <div class="col-12 col-md-12 col-lg-4">
+      <div class="col-12 col-md-12 col-lg-4 mb-4">
         <div class="card text-white text-center bg-dark pb-2">
           <div class="card-body">
             <i class="bi bi-map"></i>
@@ -149,7 +149,7 @@ function About() {
         </div>
       </div>
     
-      <div class="col-12 col-md-12 col-lg-4">
+      <div class="col-12 col-md-12 col-lg-4 mb-4">
         <div class="card text-white text-center bg-dark pb-2">
           <div class="card-body">
             <i class="bi bi-wallet"></i>
@@ -161,7 +161,7 @@ function About() {
           </div>
         </div>
       </div>
-      <div class="col-12 col-md-12 col-lg-4">
+      <div class="col-12 col-md-12 col-lg-4 mb-4">
         <div class="card text-white text-center bg-dark pb-2">
           <div class="card-body">
             <i class="bi bi-shield-lock"></i>

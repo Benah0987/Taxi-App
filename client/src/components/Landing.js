@@ -58,37 +58,38 @@ function Landing() {
       </section>
       
       <section id="counter">
-        <section class="counter-section">
-          <div class="container">
-            <div class="row text-center">
-              <div class="col-md-3 mb-lg-0 mb-md-0 mb-5">
-                <h2>
-                  <span id="count1">{counters.count1}</span>+
-                </h2>
-                <p>SAVINGS</p>
-              </div>
-              <div class="col-md-3 mb-lg-0 mb-md-0 mb-5">
-                <h2>
-                  <span id="count2">{counters.count2}</span>+
-                </h2>
-                <p>PHOTOS</p>
-              </div>
-              <div class="col-md-3 mb-lg-0 mb-md-0 mb-5">
-                <h2>
-                  <span id="count3">{counters.count3}</span>+
-                </h2>
-                <p>ROCKETS</p>
-              </div>
-              <div class="col-md-3 mb-lg-0 mb-md-0 mb-5">
-                <h2>
-                  <span id="count4">{counters.count4}</span>+
-                </h2>
-                <p>GLOBES</p>
-              </div>
-            </div>
-          </div>
-        </section>
-      </section>
+  <section class="counter-section">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-md-3 mb-lg-0 mb-md-0 mb-5">
+          <h2>
+            <span id="count1">{counters.count1}</span>+
+          </h2>
+          <p>CUSTOMERS</p>
+        </div>
+        <div class="col-md-3 mb-lg-0 mb-md-0 mb-5">
+          <h2>
+            <span id="count2">{counters.count2}</span>+
+          </h2>
+          <p>RIDES</p> 
+        </div>
+        <div class="col-md-3 mb-lg-0 mb-md-0 mb-5">
+          <h2>
+            <span id="count3">{counters.count3}</span>+
+          </h2>
+          <p>DRIVERS</p>
+        </div>
+        <div class="col-md-3 mb-lg-0 mb-md-0 mb-5">
+          <h2>
+            <span id="count4">{counters.count4}</span>+
+          </h2>
+          <p>LOCATIONS</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>
+
 
       <section id="story">
   <div className="story-section">

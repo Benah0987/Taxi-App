@@ -134,14 +134,14 @@
     box-shadow: none;
     margin-right: 10px;
 
-    background-color: yellow; 
+    color: black; 
 }
 .footer_social_area a i {
     line-height: 36px;
 }
 .footer_social_area a:hover,
 .footer_social_area a:focus {
-    color: #ffffff;
+    color: #be3333;
 }
 
 @-webkit-keyframes bi-cycle {
