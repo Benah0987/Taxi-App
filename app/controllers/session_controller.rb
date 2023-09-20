@@ -16,7 +16,7 @@ class SessionController < ApplicationController
 
       token = JWT.encode(payload, secret_key, 'HS256')
 
-      render json: { token: token }
+      render json: { success: "login succesful" }
     else
       render json: { error: "Invalid email address or password" }, status: :unauthorized
     end

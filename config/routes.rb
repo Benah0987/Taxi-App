@@ -26,4 +26,8 @@ Rails.application.routes.draw do
   # getting current user
   get '/user/current_user', to: 'users#current_user'
   get '/driver/current_driver', to: 'drivers#current_driver'
+
+
+  # deploying 
+  get "*parts", to: "react#index"
 end
