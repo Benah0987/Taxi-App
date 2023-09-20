@@ -36,7 +36,7 @@ function Home() {
     // }
 
     try {
-      const response = await fetch(`http://127.0.0.1:3000/users/4/ride_requests`, {
+      const response = await fetch(`http://127.0.0.1:3000/users/1/ride_requests`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
