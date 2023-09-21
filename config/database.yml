@@ -10,7 +10,7 @@ default: &default
   timeout: 5000
 
 development:
-  url: postgresql://taxidb_bsvy_user:w9c36qGu7GMC28kGPVet8hkZqz1PJOSC@dpg-ck5arvmg2bec73cjn22g-a.oregon-postgres.render.com/taxidb_bsvy
+  url: postgresql://taxidb_bsvy_user:w9c36qGu7GMC28kGPVet8hkZqz1PJOSC@dpg-ck5arvmg2bec73cjn22g-a/taxidb_bsvy
   # <<: *default
   # database: db/development.sqlite3
 
