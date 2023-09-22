@@ -49,7 +49,7 @@ gem 'rack-cors', require: 'rack/cors'
 
 gem 'jwt'
 
-gem 'pg'
+gem 'pg', '~> 1.5', '>= 1.5.4'
 # Use Sass to process CSS
 # gem "sassc-rails"
 
